@@ -96,108 +96,92 @@ int main() {
     return 0;
 } ''',
 3: '''// Bresenham's Circle Drawing Algorithm
-#include <iostream>
-#include <graphics.h>
-
-void drawCircle(int xc, int yc, int x, int y) {
-    putpixel(xc + x, yc + y, WHITE);
-    putpixel(xc - x, yc + y, WHITE);
-    putpixel(xc + x, yc - y, WHITE);
-    putpixel(xc - x, yc - y, WHITE);
-    putpixel(xc + y, yc + x, WHITE);
-    putpixel(xc - y, yc + x, WHITE);
-    putpixel(xc + y, yc - x, WHITE);
-    putpixel(xc - y, yc - x, WHITE);
-}
-
-void circleBresenham(int xc, int yc, int r) {
-    int x = 0, y = r;
-    int d = 3 - 2 * r;
-
-    drawCircle(xc, yc, x, y);
-
-    while (y >= x) {
-        x++;
-
-        if (d > 0) {
-            y--;
-            d += 4 * (x - y) + 10;
-        } else {
-            d += 4 * x + 6;
+#include<graphics.h>
+#include<conio.h>
+#include<graphics.h>
+#include<math.h>
+int main()
+{
+    int gd = DETECT, gm;
+    initgraph(&gd,&gm, "");
+    int xc, yc, x,y,d,r;
+    printf("Enter the center of the circle");
+    scanf("%d %d", &xc, &yc);
+    printf("Enter the radius of the circle:");
+    scanf("%d", &r);
+    x = 0, y = r;
+    d = 3 - 2 * r;
+    while(x<=y)
+    {
+        putpixel(xc + x, yc + y,WHITE);
+        putpixel(xc + y, yc + x,WHITE);
+        putpixel(xc + x, yc - y,WHITE);
+        putpixel(xc + y, yc - x,WHITE);
+        putpixel(xc - x, yc - y,WHITE);
+        putpixel(xc - y, yc - x,WHITE);
+        putpixel(xc - x, yc + y,WHITE);
+        putpixel(xc - y, yc + x,WHITE);
+        x = x + 1;
+        if (d < 0)
+        {
+          d=d+(4*x)+6;
+        }
+        else
+        {
+            y = y -1;
+            d = d + 4*(x-y)+10;
         }
 
-        drawCircle(xc, yc, x, y);
+
     }
-}
-
-int main() {
-    int xc, yc, radius;
-    int gd = DETECT, gm;
-
-    std::cout << "Enter center coordinates (xc yc): ";
-    std::cin >> xc >> yc;
-
-    std::cout << "Enter radius: ";
-    std::cin >> radius;
-
-    initgraph(&gd, &gm, ""); // Initialize graphics
-    circleBresenham(xc, yc, radius); // Draw circle using Bresenham's algorithm
     getch();
     closegraph();
-
-    return 0;
 } ''',
 4: '''// Midpoint Circle Drawing Algorithm
-#include <iostream>
-#include <graphics.h>
+#include<stdio.h>
+#include<graphics.h>
+#include<math.h>
+#include<conio.h>
 
-void drawCircle(int xc, int yc, int x, int y) {
-    putpixel(xc + x, yc + y, WHITE);
-    putpixel(xc - x, yc + y, WHITE);
-    putpixel(xc + x, yc - y, WHITE);
-    putpixel(xc - x, yc - y, WHITE);
-    putpixel(xc + y, yc + x, WHITE);
-    putpixel(xc - y, yc + x, WHITE);
-    putpixel(xc + y, yc - x, WHITE);
-    putpixel(xc - y, yc - x, WHITE);
-}
-
-void circleMidpoint(int xc, int yc, int r) {
-    int x = 0, y = r;
-    int d = 1 - r;
-
-    drawCircle(xc, yc, x, y);
-
-    while (y > x) {
-        if (d < 0) {
-            d += 2 * x + 3;
-        } else {
-            d += 2 * (x - y) + 5;
-            y--;
-        }
-        x++;
-
-        drawCircle(xc, yc, x, y);
-    }
-}
-
-int main() {
-    int xc, yc, radius;
+int main()
+{
     int gd = DETECT, gm;
+    initgraph(&gd, &gm, "");
+    int xc, yc, x, y, d, r;
+    printf(" Enter the center of the circle:");
+    scanf("%d %d", &xc, &yc);
+    printf("Enter the radius:");
+    scanf("%d", &r);
 
-    std::cout << "Enter center coordinates (xc yc): ";
-    std::cin >> xc >> yc;
+    x =0, y = r;
+    d = 1-r;
+    while(x<=y)
+    {
+        putpixel(xc+x, yc+y, RED);
+        putpixel(xc+y, yc+x, RED);
+        putpixel(xc+x, yc-y, RED);
+        putpixel(xc+y, yc-x, RED);
+        putpixel(xc-x, yc-y, RED);
+        putpixel(xc-y, yc-x, RED);
+        putpixel(xc-x, yc+y, RED);
+        putpixel(xc-y, yc+x, RED);
 
-    std::cout << "Enter radius: ";
-    std::cin >> radius;
+        x = x+1;
 
-    initgraph(&gd, &gm, ""); // Initialize graphics
-    circleMidpoint(xc, yc, radius); // Draw circle using Midpoint algorithm
+        if(d<0)
+        {
+            d = d+ 2*x + 3;
+        }
+        else
+        {
+            y = y-1;
+            d = d+ 2*(x-y) + 5;
+        }
+    }
     getch();
     closegraph();
-
-    return 0;
-} ''',
+}
+ ''',
 5: '''// Flood Fill Algorithm with 4-connected method
 #include <iostream>
 #include <graphics.h>
